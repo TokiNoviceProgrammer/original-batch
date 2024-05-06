@@ -40,7 +40,7 @@ public class Jb100Runner implements CommandLineRunner, ExitCodeExceptionMapper {
 	@Override
 	public int getExitCode(Throwable exception) {
 		if (Objects.isNull(exception)) {
-			return 1;
+			return 0;
 		}
 		// バッチ処理異常時の終了コード判定
 		//		if (exception.getCause() instanceof IllegalArgumentException) {

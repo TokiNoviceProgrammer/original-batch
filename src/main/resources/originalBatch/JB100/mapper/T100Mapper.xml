@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="originalBatch.JB100.mapper.T100Mapper">
+	<select id="selectMaxId" resultType="integer">
+		<![CDATA[
+			select
+			    max(id) 
+			from
+			    t100;
+		]]>
+	</select>
+	<insert id="insertT100">
+		<![CDATA[
+			insert 
+			into t100( 
+			    id
+			    , seq
+			    , column01
+			    , column02
+			    , column03
+			    , created_at
+			    , created_id
+			    , updated_at
+			    , updated_id
+			) 
+			values ( 
+			    #{id}
+			    , #{seq}
+			    , #{column01}
+			    , #{column02}
+			    , #{column03}
+			    , current_timestamp
+			    , #{createdId}
+			    , current_timestamp
+			    , #{updateId}
+			);
+		]]>
+	</insert>
+
+</mapper>
