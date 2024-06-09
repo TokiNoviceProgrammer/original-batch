@@ -17,87 +17,101 @@ public class Jb100ServiceTest {
 	private Jb100Service targetService;
 
 	@Test
-	@DisplayName("テストケース01")
+	@DisplayName("値が範囲内にある場合（中間値）")
 	public void test01() {
-		// テストケースの準備
 		BigDecimal val = new BigDecimal("10.5");
 		BigDecimal lower = new BigDecimal("10.0");
 		BigDecimal upper = new BigDecimal("20.0");
-
-		// テスト実行
 		assertTrue(targetService.isInRange(val, lower, upper));
 	}
 
 	@Test
-	@DisplayName("テストケース02")
+	@DisplayName("値が範囲の下限と等しい場合")
 	public void test02() {
-		// テストケースの準備
-		BigDecimal val = new BigDecimal("10.5");
-		BigDecimal lower = new BigDecimal("10.5");
-		BigDecimal upper = new BigDecimal("20.0");
-
-		// テスト実行
-		assertTrue(targetService.isInRange(val, lower, upper));
-	}
-
-	@Test
-	@DisplayName("テストケース03")
-	public void test03() {
-		// テストケースの準備
-		BigDecimal val = new BigDecimal("10.5");
+		BigDecimal val = new BigDecimal("10.0");
 		BigDecimal lower = new BigDecimal("10.0");
-		BigDecimal upper = new BigDecimal("10.5");
-
-		// テスト実行
+		BigDecimal upper = new BigDecimal("20.0");
 		assertTrue(targetService.isInRange(val, lower, upper));
 	}
 
 	@Test
-	@DisplayName("テストケース04")
-	public void test04() {
-		// テストケースの準備
-		BigDecimal val = new BigDecimal("10.5");
-		BigDecimal lower = new BigDecimal("9.0");
-		BigDecimal upper = new BigDecimal("10.0");
+	@DisplayName("値が範囲の上限と等しい場合")
+	public void test03() {
+		BigDecimal val = new BigDecimal("20.0");
+		BigDecimal lower = new BigDecimal("10.0");
+		BigDecimal upper = new BigDecimal("20.0");
+		assertTrue(targetService.isInRange(val, lower, upper));
+	}
 
-		// テスト実行
+	@Test
+	@DisplayName("値が範囲外の場合（上限を超える）")
+	public void test04() {
+		BigDecimal val = new BigDecimal("21.0");
+		BigDecimal lower = new BigDecimal("10.0");
+		BigDecimal upper = new BigDecimal("20.0");
 		assertFalse(targetService.isInRange(val, lower, upper));
 	}
 
 	@Test
-	@DisplayName("テストケース05")
+	@DisplayName("値が範囲外の場合（下限未満）")
 	public void test05() {
-		// テストケースの準備
+		BigDecimal val = new BigDecimal("9.0");
+		BigDecimal lower = new BigDecimal("10.0");
+		BigDecimal upper = new BigDecimal("20.0");
+		assertFalse(targetService.isInRange(val, lower, upper));
+	}
+
+	@Test
+	@DisplayName("値が負の範囲内にある場合")
+	public void test06() {
 		BigDecimal val = new BigDecimal("-10.5");
 		BigDecimal lower = new BigDecimal("-11.0");
 		BigDecimal upper = new BigDecimal("-10.0");
-
-		// テスト実行
 		assertTrue(targetService.isInRange(val, lower, upper));
 	}
 
 	@Test
-	@DisplayName("テストケース06")
-	public void test06() {
-		// テストケースの準備
+	@DisplayName("値が負の範囲外の場合")
+	public void test07() {
 		BigDecimal val = new BigDecimal("-10.5");
 		BigDecimal lower = new BigDecimal("-10.0");
 		BigDecimal upper = new BigDecimal("-9.0");
-
-		// テスト実行
 		assertFalse(targetService.isInRange(val, lower, upper));
 	}
 
 	@Test
-	@DisplayName("テストケース07")
-	public void test07() {
-		// テストケースの準備
+	@DisplayName("値がnullの場合")
+	public void test08() {
 		BigDecimal val = null;
 		BigDecimal lower = new BigDecimal("10.0");
 		BigDecimal upper = new BigDecimal("11.0");
-
-		// テスト実行
 		assertFalse(targetService.isInRange(val, lower, upper));
 	}
 
+	@Test
+	@DisplayName("下限がnullの場合")
+	public void test09() {
+		BigDecimal val = new BigDecimal("10.5");
+		BigDecimal lower = null;
+		BigDecimal upper = new BigDecimal("11.0");
+		assertFalse(targetService.isInRange(val, lower, upper));
+	}
+
+	@Test
+	@DisplayName("上限がnullの場合")
+	public void test10() {
+		BigDecimal val = new BigDecimal("10.5");
+		BigDecimal lower = new BigDecimal("10.0");
+		BigDecimal upper = null;
+		assertFalse(targetService.isInRange(val, lower, upper));
+	}
+
+	@Test
+	@DisplayName("下限が上限より大きい場合")
+	public void test11() {
+		BigDecimal val = new BigDecimal("10.5");
+		BigDecimal lower = new BigDecimal("20.0");
+		BigDecimal upper = new BigDecimal("10.0");
+		assertFalse(targetService.isInRange(val, lower, upper));
+	}
 }
