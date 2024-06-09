@@ -1,5 +1,6 @@
 package originalBatch.JB100.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import org.springframework.stereotype.Service;
@@ -40,6 +41,17 @@ public class Jb100ServiceImpl implements Jb100Service {
 				tSts = this.startTransaction();//トランザクション開始
 			}
 		}
+	}
+
+	@Override
+	public boolean isInRange(BigDecimal val, BigDecimal lower, BigDecimal upper) {
+		if (Objects.isNull(val) || Objects.isNull(lower) || Objects.isNull(upper)) {
+			return false;
+		}
+
+		boolean result = val.compareTo(lower) >= 0 && val.compareTo(upper) <= 0;
+
+		return result;
 	}
 
 	private T100 createT100(int id, int seq) {
