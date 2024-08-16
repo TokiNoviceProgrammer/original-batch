@@ -15,5 +15,9 @@ public interface T100Mapper {
 	 */
 	public Integer selectMaxId();
 
+	/**
+	 * T100のデータを登録
+	 * @param t100
+	 */
 	public void insertT100(T100 t100);
 }
