@@ -19,6 +19,10 @@ public class Jb100Runner implements CommandLineRunner, ExitCodeExceptionMapper {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Jb100Runner.class);
 
+	/**
+	 * コンストラクタ
+	 * @param jb100Service
+	 */
 	public Jb100Runner(Jb100Service jb100Service) {
 		this.jb100Service = jb100Service;
 	}
