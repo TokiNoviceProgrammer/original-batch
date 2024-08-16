@@ -4,10 +4,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 import originalBatch.JB100.model.T100;
 
-@Mapper
 /**
  * T100へのDB操作
  */
+@Mapper
 public interface T100Mapper {
 	/**
 	 * T100のidの最大値を取得
